@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#080809">
+  <title>Tattoo Trace Studio V2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <header class="topbar" id="topbar">
+    <div class="brand">
+      <div class="brand-mark">TT</div>
+      <div><strong>Tattoo Trace</strong><span>Studio V2</span></div>
+    </div>
+    <label class="upload-button" for="imageInput">
+      <span>＋</span><span>Adicionar desenho</span>
+    </label>
+    <input id="imageInput" type="file" accept="image/*" hidden>
+  </header>
+
+  <section class="workspace" id="workspace">
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">⌁</div>
+      <h1>Coloque seu desenho aqui</h1>
+      <p>Envie uma foto, ajuste o desenho e depois trave a tela para fazer o decalque.</p>
+      <label class="primary-button" for="imageInput">Escolher imagem</label>
+    </div>
+
+    <div class="stage hidden" id="stage">
+      <canvas id="imageCanvas"></canvas>
+      <div class="ruler hidden" id="ruler">
+        <div class="ruler-line"></div>
+        <div class="ruler-label" id="rulerLabel">0 cm</div>
+      </div>
+    </div>
+
+    <button class="lock-button" id="lockButton" aria-label="Travar desenho">🔓</button>
+    <div class="locked-badge hidden" id="lockedBadge">● TRAVADO</div>
+  </section>
+
+  <section class="controls" id="controls">
+    <div class="tool-grid">
+      <button id="zoomOut">−<small>Zoom</small></button>
+      <button id="zoomIn">＋<small>Zoom</small></button>
+      <button id="mirror">⇋<small>Espelhar</small></button>
+      <button id="lineArt">✦<small>Linhas</small></button>
+      <button id="contrastDown">◐<small>Contraste −</small></button>
+      <button id="contrastUp">◑<small>Contraste +</small></button>
+      <button id="rulerButton">⌁<small>Régua</small></button>
+      <button id="reset">↺<small>Redefinir</small></button>
+    </div>
+
+    <div class="slider-row">
+      <span>Escala</span>
+      <input id="zoomSlider" type="range" min="25" max="300" value="100">
+      <output id="zoomValue">100%</output>
+    </div>
+
+    <div class="slider-row">
+      <span>Contraste</span>
+      <input id="contrastSlider" type="range" min="-100" max="100" value="0">
+      <output id="contrastValue">0</output>
+    </div>
+
+    <div class="ruler-settings hidden" id="rulerSettings">
+      <label>Calibração da tela
+        <input id="pxPerCm" type="number" min="10" max="500" step="0.1" value="37.8">
+      </label>
+      <span>Use uma régua física para calibrar os pixels por centímetro. O valor é salvo neste aparelho.</span>
+    </div>
+
+    <p class="hint">Arraste o desenho com um dedo para posicioná-lo. Ajuste tudo antes de tocar no cadeado.</p>
+  </section>
+</main>
+
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
